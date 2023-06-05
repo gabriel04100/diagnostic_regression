@@ -80,7 +80,7 @@ def main():
         filtered_indices = filtered_y_test[(filtered_y_test['transfertRealValue'] > threshold_min) & (filtered_y_test['transfertRealValue'] <threshold_max)].index
         filtered_x_test = filtered_x_test.loc[filtered_indices]
         filtered_y_test = filtered_y_test.loc[filtered_indices]
-        st.write(filtered_x_test.shape)
+        st.write("shape :",filtered_x_test.shape)
         
         for i, model in enumerate(models):
             st.write(f"Modèle {i+1}")
