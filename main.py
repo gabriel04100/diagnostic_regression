@@ -110,7 +110,7 @@ def main():
 
             complet["vrai_prix"]=filtered_y_test['transfertRealValue']
             complet["prediction"]=predictions
-            complet["erreur"]=np.abs(errors)
+            complet["erreur"]=errors
             st.write(complet)
             csv = download_dataframe(complet)
             st.download_button(label="Télécharger le DataFrame", data=csv, file_name="dataframe.csv", mime="text/csv")
