@@ -114,11 +114,6 @@ def main():
             st.write(complet)
             csv = download_dataframe(complet)
             st.download_button(label="Télécharger le DataFrame", data=csv, file_name="dataframe.csv", mime="text/csv")
-
-            #st.write(pd.DataFrame({"vrai_prix":filtered_y_test['transfertRealValue'],"prediction":predictions,"erreur":np.abs(errors)}))
-            
-            # Visualisation des prédictions vs les vraies valeurs
-            # Tracer le graphique des prédictions par rapport aux valeurs réelles
             
             fig = px.scatter(data_frame=complet,
                              title="Comparaison vrai prix et prédictions par rôle",
@@ -128,6 +123,8 @@ def main():
                 size_max=60,
             )
             st.plotly_chart(fig)
+            fig_resid = px.scatter(complet, x=complet.index, y="erreur", trendline="ols", labels={"x": "Index", "y": "Résidus"})
+            st.plotly_chart(fig_resid)
             feature_importances = model[1].feature_importances_
             # Obtenir les indices triés des caractéristiques les plus importantes
             top_indices = feature_importances.argsort()[::-1][:10]  # Les 10 indices des caractéristiques les plus importantes
