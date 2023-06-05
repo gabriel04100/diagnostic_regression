@@ -23,6 +23,9 @@ def load_data():
         return x_test_df, y_test_df
     
     return None, None
+def download_dataframe(df):
+    csv = df.to_csv(index=False)
+    return csv
 
 def load_model():
     models = st.file_uploader("Sélectionnez le(s) fichier(s) modèle(s)", accept_multiple_files=True)
@@ -109,6 +112,8 @@ def main():
             complet["prediction"]=predictions
             complet["erreur"]=np.abs(errors)
             st.write(complet)
+            csv = download_dataframe(complet)
+            st.download_button(label="Télécharger le DataFrame", data=csv, file_name="dataframe.csv", mime="text/csv")
 
             #st.write(pd.DataFrame({"vrai_prix":filtered_y_test['transfertRealValue'],"prediction":predictions,"erreur":np.abs(errors)}))
             
