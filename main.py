@@ -126,7 +126,7 @@ def main():
             feature_importances = model[1].feature_importances_
             # Obtenir les indices triés des caractéristiques les plus importantes
             top_indices = feature_importances.argsort()[::-1][:10]  # Les 10 indices des caractéristiques les plus importantes
-            feature_names=filtered_x_test.columns
+            feature_names=x_test.columns
             # Obtenir les noms des caractéristiques correspondantes
             top_features = [feature_names[i] for i in top_indices]  # Supposons que vous ayez les noms des caractéristiques dans une liste feature_names
 
