@@ -123,7 +123,7 @@ def main():
                 size_max=60,
             )
             st.plotly_chart(fig)
-            fig_resid = px.scatter(complet, x=complet.index, y="erreur", trendline="ols", labels={"x": "Index", "y": "Résidus"})
+            fig_resid = px.scatter(complet, x="vrai_prix", y="erreur", trendline="ols", labels={"x": "vrai_prix", "y": "Résidus"})
             st.plotly_chart(fig_resid)
             feature_importances = model[1].feature_importances_
             # Obtenir les indices triés des caractéristiques les plus importantes
