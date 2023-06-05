@@ -123,6 +123,8 @@ def main():
                 size_max=60,
             )
             st.plotly_chart(fig)
+            feature_importances = model[1].feature_importances_
+            st.write(feature_importances)
    
     else:
         st.write("Veuillez charger les fichiers X_test, y_test et les fichiers modèle.")
