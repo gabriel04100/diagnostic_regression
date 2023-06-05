@@ -123,7 +123,25 @@ def main():
                 size_max=60,
             )
             st.plotly_chart(fig)
-            
+            feature_importances = model[1].feature_importances_
+            # Obtenir les indices triés des caractéristiques les plus importantes
+            top_indices = feature_importances.argsort()[::-1][:10]  # Les 10 indices des caractéristiques les plus importantes
+            s=model['selector']
+            result=[s.get_feature_names_out()]
+            result= [str(x).split('__')[1] for x in result[0]]
+            feature_names=result
+            # Obtenir les noms des caractéristiques correspondantes
+            top_features = [feature_names[i] for i in top_indices]  # Supposons que vous ayez les noms des caractéristiques dans une liste feature_names
+
+            # Créer un DataFrame avec les noms des caractéristiques et leurs importances
+            df_importances = pd.DataFrame({'Features': top_features, 'Importance': feature_importances[top_indices]})
+
+            # Créer un graphique à barres pour représenter l'importance des caractéristiques
+            fig_imp = px.bar(df_importances, x='Features', y='Importance', color='Importance',
+                        labels={'Features': 'Caractéristiques', 'Importance': 'Importance'},
+                        title='Importance des caractéristiques - Random Forest',
+                        color_continuous_scale='Blues')
+            st.plotly_chart(fig_imp)
    
     else:
         st.write("Veuillez charger les fichiers X_test, y_test et les fichiers modèle.")
